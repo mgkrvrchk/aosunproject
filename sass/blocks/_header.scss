@@ -1,0 +1,383 @@
+//  -------> HEADER <-------
+.page-header {
+    position: fixed;
+    width: 100%;
+    padding: 1rem 0;
+    z-index: 1050;
+    background-color: $text-color;
+
+    //  -------> HEADER CONTAINER <-------
+    & > .container-md {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+//  -------> NAV <-------
+.nav {
+    //  -------> HEADER NAV BRAND <-------
+    &-brand {
+        display: inline-block;
+        width: 10rem;
+        text-align: center;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        &__subtitle {
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            color: $general-color;
+        }
+    }
+
+    //  -------> HEADER BUTTON <-------
+    &-btn {
+        display: none;
+        position: relative;
+        margin-right: 4rem;
+        overflow: hidden;
+
+        //  -------> ANIMATION ELEMENT <-------
+        &::after {
+            content: "";
+            display: block;
+            width: 25px;
+            height: 100px;
+            background-color: #fff;
+            opacity: 0.2;
+            position: absolute;
+            left: -50px;
+            top: -10px;
+            z-index: 1;
+            transform: rotate(25deg);
+            transition: all 0.1s;
+            animation: slideShine 5s ease-in-out 2s infinite;
+        }
+
+        //  -------> DISABLE ANIMATION <-------
+        &:active::after {
+            display: none;
+        }
+    }
+
+    //  -------> HEADER CONTACT <-------
+    &-contact {
+        display: none;
+        margin-right: 5rem;
+        padding-left: 2rem;
+        font-size: 1.8rem;
+
+        &__caption {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .fa {
+            position: absolute;
+            left: 0;
+        }
+
+        a {
+            position: relative;
+            display: block;
+            padding-left: 3rem;
+            color: $light-color;
+
+            & + a {
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    //  -------> HEADER TOGGLER <-------
+    &-toggler {
+        @extend %toggle-btn;
+
+        &__bars {
+            @extend %bar;
+            
+            &::after {
+                bottom: -8px;
+                content: " ";
+                @extend %bar;
+            }
+
+            &::before {
+                top: -8px;
+                content: " ";
+                @extend %bar;
+            }
+        }
+    }
+
+    //  -------> NAV COLLAPSE <-------
+    &-collapse {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        min-height: 100%;
+        background-color: $light-color;
+        transform: translateY(-100%);
+        transition: transform linear 300ms;
+        z-index: 1051;
+
+        // COLLAPSE CONTAINER
+        & > .container-md {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        //  -------> ENABLE ANIMATION <-------
+        &.active {
+            transform: translateY(0%);
+        }
+
+        //  -------> NAV FOOTER <-------
+        .nav {
+            &-footer {
+                //  -------> NAV BUTTON <-------
+                .nav-btn {
+                    display: block;
+                    width: 100%;
+                }
+
+                //  -------> NAV CONTACT <-------
+                .nav-contact {
+                    display: block;
+                    padding: 2rem 0;
+                    margin-right: 0;
+    
+                    a {
+                        color: $text-color;
+                    }
+                }
+            }
+    
+            //  -------> NAV TOGGLER <-------
+            &-toggler {
+                @extend %toggle-btn;
+    
+                &__times {   
+                    width: inherit;     
+    
+                    &::after {
+                        content: " ";
+                        @extend %bar;
+                        transform: rotate(45deg);
+                    }
+    
+                    &::before {
+                        content: " ";
+                        @extend %bar;
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+        }
+    }
+
+    // Collapse Header
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    // Collapse Navbar
+    &-navbar {
+        display: block;
+        padding: 2rem 0;
+    }
+
+    // Navbar Items
+    &-item {
+        & + & {
+            margin-top: 2.3rem;
+        }
+    }
+
+    // Navbar Links
+    &-link {
+        display: inline-block;
+        position: relative;
+        font-size: 1.8rem;
+        padding-bottom: .5rem;
+        color: $text-color;
+        transition: color linear 200ms;
+
+        // Animate Bottom Border
+        &::after {
+            position: absolute;
+            content: ' ';
+            bottom: -.5rem;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: $general-color;
+            transition: width linear 200ms;
+        }
+
+        // Hover Animation
+        &:hover {
+            color: $general-color;
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
+
+    // Social Links
+    &-social {
+        margin: 2rem 0;
+        text-align: center;
+        font-size: 2.4rem;
+
+        &__item {
+            display: inline-block;
+
+            & + & {
+                margin-left: 1rem;
+            }
+        }
+
+        &__link {
+            color: $text-color;
+        }
+    }
+}
+
+//  -------> EXTEND CLASSES <-------
+%toggle-btn {
+    position: relative;
+    padding: 0;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border: none;
+    background-color: transparent;
+}
+
+%bar {
+    position: absolute;
+    left: 0;
+    display: block;
+    width: inherit;
+    height: 2px;
+    background-color: $general-color;
+}
+
+//  -------> MEDIA QUERIES SM <-------
+@media (min-width: 576px) {
+    //  -------> HEADER <-------
+    .page-header {
+        //  -------> RIGHT PART <-------
+        &__right {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .nav {
+        //  -------> HEADER NAV BRAND <-------
+        &-brand {
+            width: 12rem;
+
+            &__subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        //  -------> HEADER BUTTON <-------
+        &-btn {
+            display: inline-block;
+        }
+
+        //  -------> NAV FOOTER <-------
+        &-footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-height: 350px;
+        }
+    }
+}
+
+//  -------> MEDIA QUERIES MD <-------
+@media (min-width: 768px) {
+    .nav {
+        //  -------> HEADER CONTACT <-------
+        &-contact {
+            display: inline-block;
+        }
+
+        //  -------> NAV COLLAPSE <-------
+        &-collapse {
+            > .container-md {
+                justify-content: center;
+            }
+
+            .row {
+                margin-top: 5rem;
+            }
+        }
+
+        //  -------> NAV FOOTER <-------
+        &-footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+
+            //  -------> NAV CONTACT <-------
+            .nav-contact {
+                a {
+                    display: inline-block;
+                    width: 200px;
+                }
+            }
+        }
+    }
+}
+
+//  -------> MEDIA QUERIES LG <-------
+@media (min-width: 1200px) {
+    .nav {
+        //  -------> NAV BRAND <-------
+        &-brand {
+           width: 14rem;     
+        }
+    }
+}
+
+
+//  -------> ANIMATION FRAME FOR HEADER & NAV BUTTON <-------
+@keyframes slideShine {
+    0% { 
+        left: -50px; 
+        opacity: 0.2;
+    }
+    
+    30% { 
+        left: 110%; 
+        opacity: 1;
+    }
+
+    100% { left: 110%; }
+}
